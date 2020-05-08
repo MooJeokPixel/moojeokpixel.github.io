@@ -1,4 +1,4 @@
-// # moojeokpixel.github.io
+# moojeokpixel.github.io
 
 <head>
     <style>
