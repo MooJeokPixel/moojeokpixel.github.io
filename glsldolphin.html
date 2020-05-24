@@ -549,7 +549,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 vv = normalize( cross(uu,ww));
 	
 	// create view ray 카메라 뷰 확대/축소
-	vec3 rd = normalize( p.x*uu + p.y*vv + 1.0*ww*(1.0+0.7*smoothstep(-0.2,0.2,sin(0.34*iTime))) ); //0.8
+	vec3 rd = normalize( p.x*uu + p.y*vv + 0.8*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) ); //0.8
 //	vec3 rd = normalize( p.x*uu + p.y*vv + 2.0*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) );
 
     //-----------------------------------------------------
