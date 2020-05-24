@@ -329,7 +329,7 @@ vec3 getStoneColor(vec3 p, float c, vec3 l, vec3 n, vec3 e) {
     c = min(c + pow(noise_3(vec3(p.x*20.0,0.0,p.z*20.0)),70.0) * 8.0, 1.0);
     float ic = pow(1.0-c,0.5);
     vec3 base = vec3(0.22,0.3,0.2) * 0.35;
-    vec3 sand = vec3(3.01,3.51,3.52)*1.9;
+    vec3 sand = vec3(4.01,4.51,4.52)*1.9;
     //파랑:    vec3 sand = vec3(0.21,0.41,5.32)*0.9;
     //형광노랑:vec3 sand = vec3(0.71,1.41,0.32)*0.9;
     //형광분홍:    vec3 sand = vec3(1.81,0.41,2.32)*0.9;
