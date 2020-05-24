@@ -545,11 +545,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // camera matrix
     vec3 ww = normalize( ta - ro );
     //vec3 uu = normalize( cross(ww,vec3(0.0,0.0,0.0) ) );
-	vec3 uu = normalize( vec3(-ww.z,1.0,ww.x) ); // 카메라 왜곡
+	vec3 uu = normalize( vec3(-ww.z,0.0,ww.x) ); // 카메라 왜곡
     vec3 vv = normalize( cross(uu,ww));
 	
 	// create view ray 카메라 뷰 확대/축소
-	vec3 rd = normalize( p.x*uu + p.y*vv + 1.0*ww*(1.0+0.7*smoothstep(-0.8,0.8,sin(0.34*iTime))) ); //0.8
+	vec3 rd = normalize( p.x*uu + p.y*vv + 1.0*ww*(1.0+0.7*smoothstep(-0.2,0.2,sin(0.34*iTime))) ); //0.8
 //	vec3 rd = normalize( p.x*uu + p.y*vv + 2.0*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) );
 
     //-----------------------------------------------------
