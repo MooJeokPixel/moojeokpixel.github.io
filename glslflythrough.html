@@ -128,9 +128,9 @@ uniform float       iSampleRate;
  * 
  * The shader was created and exported from Synthclipse [ http://synthclipse.sourceforge.net/ ].
  */
-const float FOV = 1.4; //바네팅 //0.8
+const float FOV = 0.8; //화면 가장자리 왜곡 //0.8
 const float MarchDumping = 0.9579; //묽기? 
-const float Far = 38.925;
+const float Far = 28.925; // 원근 생성
 const int MaxSteps = 128;
 const float CameraSpeed = 4.0099998; // 카메라 속도  
 const float TunnelSmoothFactor = 4.0; // 프랙탈 
@@ -166,10 +166,10 @@ float noise(vec3 x) {
 
 float fbm(vec3 p) {
 	float f = 0.0;
-	f = 0.5500 * noise(p); // 알맹이 크기
+	f = 0.7500 * noise(p); // 알맹이 크기 //5500
 	p *= 2.11; // 자잘 
 	f += 0.1100 * noise(p);
-	p *= 2.12; // 자잘 
+	p *= 2.12; // 자잘  
 	f += 0.1150 * noise(p);
 
 	return f;
@@ -264,7 +264,7 @@ float calcAO(vec3 pos, vec3 nor) {
 }
 
 vec3 render(vec3 ro, vec3 rd) {
-	vec3 col = vec3(0.0);
+	vec3 col = vec3(0, 1, 0); // bgcolor
 	vec2 res = castRay(ro, rd);
 	float t = res.x;
 	float m = res.y;
@@ -340,10 +340,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     vec3 col = render(ro, rd);
 
-    col = pow(col, vec3(0.4545));
+    col = pow(col, vec3(0.4545)); // 0.4545
 
     fragColor = vec4(col, 1.0);
 }
+
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
 }
