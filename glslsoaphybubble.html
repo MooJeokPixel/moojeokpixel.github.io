@@ -214,7 +214,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = -1.+2. * fragCoord.xy/iResolution.xy;
     uv.x *= iResolution.x/iResolution.y;	// Aspect Correction
 
-    vec3 rayOrigin = vec3(0, 0, 2.0); // 1.6
+    vec3 rayOrigin = vec3(0, 0, 2.0); // 1.6 // 위치
     vec3 rayDir = vec3(uv.x, -uv.y, -1.);
     
     float totalDist = 0.0;
@@ -228,7 +228,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         totalDist += dist;
         pos += dist * rayDir;
     }
-    fragColor = vec4(vec3(0, 0.5, 0),1.0);	// BG Colour 방울의 경계선 밖의 색깔 
+    fragColor = vec4(vec3(0, 0.9, 0.0),1.0);	// BG Colour 방울의 경계선 밖의 색깔 
     if(dist < MINDIST) // Found Intersection
     {
         // Calc distancefield gradient
@@ -244,7 +244,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         float fresnel = 1.-dot(normal, I);
         fresnel = pow(fresnel, 2.25); // 진함
     // fresnel = pow(fresnel, 4.25); 
-        fresnel = fresnel + 0.975 * (1. - fresnel); // 불투명도 // 0.075 // BG 가 흰색(약 0.018 이상)일 경우: 1.075 로 설정 
+        fresnel = fresnel + 1.075 * (1. - fresnel); // 불투명도 // 0.075 // BG 가 흰색(약 0.018 이상)일 경우: 1.075 로 설정 
         vec3 ref = reflect(I,normal);	// Reflection Vector
     //   vec3 spec = vec3(texture( iChannel0, ref ));	// Cube Map Reflection
     //   spec = max(vec3(0.), spec-vec3(0.7575)) + pow(spec*1.2, vec3(4.5)) * vec3(1.2,1.1,0.6);// + vec3(0.1385);                 
