@@ -128,20 +128,20 @@ uniform float       iSampleRate;
  * 
  * The shader was created and exported from Synthclipse [ http://synthclipse.sourceforge.net/ ].
  */
-const float FOV = 0.8; //화면 가장자리 왜곡 //0.8
+const float FOV = 0.8; //가장자리 왜곡 //0.8
 const float MarchDumping = 0.9579; //묽기? 
-const float Far = 28.925; // 원근 생성
+const float Far = 38.925;
 const int MaxSteps = 128;
-const float CameraSpeed = 4.0099998; // 카메라 속도  
-const float TunnelSmoothFactor = 4.0; // 프랙탈 
-const float TunnelRadius = 0.85660005;
+const float CameraSpeed = 7.0099998; // 카메라 속도  
+const float TunnelSmoothFactor = 3.0; // 프랙탈 
+const float TunnelRadius = 0.95660005;
 const float TunnelFreqA = 0.16003;
 const float TunnelFreqB = 0.25;
-const float TunnelAmpA = 3.6230998;
+const float TunnelAmpA = 2.6230998;
 const float TunnelAmpB = 2.4324;
 const float NoiseIsoline = 0.329;
 const float NoiseScale = 4.9980001; //2 , 4, 6
-const vec3 Color = vec3(0.285, 0.558, 1.4);
+const vec3 Color = vec3(0.5, 0.3, 0.6); // 프랙탈 색상 설정
 
 #define M_NONE -1.0
 #define M_NOISE 1.0
@@ -166,10 +166,10 @@ float noise(vec3 x) {
 
 float fbm(vec3 p) {
 	float f = 0.0;
-	f = 0.7500 * noise(p); // 알맹이 크기 //5500
+	f = 0.6500 * noise(p); // 알맹이 크기
 	p *= 2.11; // 자잘 
 	f += 0.1100 * noise(p);
-	p *= 2.12; // 자잘  
+	p *= 2.12; // 자잘 
 	f += 0.1150 * noise(p);
 
 	return f;
@@ -264,7 +264,7 @@ float calcAO(vec3 pos, vec3 nor) {
 }
 
 vec3 render(vec3 ro, vec3 rd) {
-	vec3 col = vec3(0, 1, 0); // bgcolor
+	vec3 col = vec3(0.0, 1.0, 0.0); // 배경 그린스크린으로 
 	vec2 res = castRay(ro, rd);
 	float t = res.x;
 	float m = res.y;
@@ -275,7 +275,7 @@ vec3 render(vec3 ro, vec3 rd) {
 
 		// material
 		col = Color + sin(t * 0.6) * 0.1;
-		col += 0.2 * sin(vec3(0.15, 0.02, 0.10) * iTime * 4.0);
+		col += 0.4 * sin(vec3(0.15, 0.02, 0.10) * iTime * 8.0);
 
 		// lighitng
 		float occ = calcAO(pos, nor);
@@ -303,8 +303,8 @@ vec3 render(vec3 ro, vec3 rd) {
 		brdf += 2.20 * spe * vec3(4.20, 1.90, 3.60) * dif; // 빛 색깔
 		//	brdf += 2.20 * spe * vec3(1.00, 0.90, 0.60) * dif;
 
-		brdf += 0.40 * amb * vec3(1.0, 0.70, 1.0) * occ;
-		brdf += 0.40 * fre * vec3(1.00, 2.00, 2.00) * occ; // 디폴트: 모두 2.00
+		brdf += 0.40 * amb * vec3(1.0, 1.70, 1.0) * occ;
+		brdf += 0.40 * fre * vec3(2.00, 2.00, 2.00) * occ; // 디폴트: 모두 2.00
 
 		col = col * brdf;
 
@@ -340,7 +340,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     vec3 col = render(ro, rd);
 
-    col = pow(col, vec3(0.4545)); // 0.4545
+    col = pow(col, vec3(0.4545));
 
     fragColor = vec4(col, 1.0);
 }
