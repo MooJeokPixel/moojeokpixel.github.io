@@ -155,7 +155,7 @@ vec3 accentColor1 = vec3(0.1, 0.6, 1.);
 vec3 secondColor1 = vec3(.4, .5, 1.);
 
 vec3 accentColor2 = vec3(0.8, 1.5, 1.1);
-vec3 secondColor2 = vec3(0.2, .5, .6);
+vec3 secondColor2 = vec3(0.8, .5, .8);
 
 vec3 bg;	 	// global background color
 vec3 accent;	// color of the phosphorecence
@@ -453,7 +453,7 @@ de CastRay(ray r) {
     vec3 p;
     rc q;
     float t = iTime;
-    vec3 grid = vec3(6., 25., 4.); // 마리
+    vec3 grid = vec3(10.,45., 8.); // 마리
         
     for(float i=0.; i<MAX_STEPS; i++) {
         p = r.o + r.d*d;
