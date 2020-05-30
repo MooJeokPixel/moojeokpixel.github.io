@@ -114,7 +114,6 @@ uniform float       iSampleRate;
 #define iGlobalFrame iFrame
 
 #define SHADER_TOY
-
 /**
  * Credit of Kamil Kolaczynski (revers) - 2016
  *
@@ -344,7 +343,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     fragColor = vec4(col, 1.0);
 }
-
 
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
