@@ -535,12 +535,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 	float an = 1.2 + 0.1*iTime - 12.0*(m.x-0.5);
 
-	vec3 ta = vec3(fishPos.x,-0.8,fishPos.z) - vec3(-2.2,-1.0,-2.0); // 중심 축 이동
+	vec3 ta = vec3(fishPos.x,-0.8,fishPos.z) - vec3(-2.2,-1.2,-2.0); // 중심 축 이동
 	vec3 ro = ta + vec3(4.0*sin(an),-1.0,4.0*cos(an)); // 카메라 축 이동 
 
     // shake
 	ro += 0.5*sin(4.0*iTime*vec3(0.1,1.2,1.3)+vec3(3.0,0.0,1.0) );
-	ta += 0.02*sin(4.0*iTime*vec3(1.7,1.5,1.6)+vec3(1.0,2.0,1.0) );
+	ta += 0.02*sin(4.0*iTime*vec3(1.7,1.5,1.6)+vec3(1.0,4.0,1.0) );
 
     // camera matrix
     vec3 ww = normalize( ta - ro );
@@ -549,7 +549,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 vv = normalize( cross(uu,ww));
 	
 	// create view ray 카메라 뷰 확대/축소
-	vec3 rd = normalize( p.x*uu + p.y*vv + 0.8*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) ); //0.8
+	vec3 rd = normalize( p.x*uu + p.y*vv + 0.4*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) ); //0.8
 //	vec3 rd = normalize( p.x*uu + p.y*vv + 2.0*ww*(1.0+0.7*smoothstep(-0.4,0.4,sin(0.34*iTime))) );
 
     //-----------------------------------------------------
@@ -685,6 +685,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	
 	fragColor = vec4( col, 1.0 );
 }
+
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
 }
